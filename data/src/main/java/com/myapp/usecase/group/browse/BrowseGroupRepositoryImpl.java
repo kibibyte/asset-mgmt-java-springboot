@@ -26,8 +26,10 @@ class BrowseGroupRepositoryImpl implements BrowseGroupRepository {
 
     return groups.stream().map(
         assetEntity -> new Group(
+            assetEntity.getId(),
             assetEntity.getName(),
-            assetEntity.getDescription())
+            assetEntity.getDescription()
+        )
     ).collect(toList());
   }
 }

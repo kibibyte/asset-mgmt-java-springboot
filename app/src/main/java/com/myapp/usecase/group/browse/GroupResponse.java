@@ -7,6 +7,7 @@ import lombok.Value;
 @Builder
 public class GroupResponse {
 
+  Long id;
   String name;
   String description;
 }
