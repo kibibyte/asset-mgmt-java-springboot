@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'io.freefair.lombok'
+}
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy'
+    testImplementation('org.spockframework:spock-core')
+}
+
+test {
+    useJUnitPlatform()
+}
