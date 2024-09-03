@@ -1,11 +1,11 @@
-package com.myapp.usecase.asset.browse;
-
-import com.myapp.usecase.asset.Asset;
+package com.myapp.usecase;
 
 import java.util.List;
 import java.util.Optional;
 
-interface BrowseAssetRepository {
+import com.myapp.usecase.asset.Asset;
+
+public interface AssetRepository {
 
   Optional<Asset> find(Long assetId);
 

@@ -1,4 +1,4 @@
-package com.myapp.usecase.asset.browse;
+package com.myapp.usecase;
 
 import static java.util.stream.Collectors.toList;
 
@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.myapp.usecase.AssetEntity;
 import com.myapp.usecase.asset.Asset;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +16,7 @@ import lombok.val;
 
 @Repository
 @AllArgsConstructor
-class BrowseAssetRepositoryImpl implements BrowseAssetRepository {
+public class AssetRepositoryImpl implements AssetRepository {
 
   private EntityManager entityManager;
 

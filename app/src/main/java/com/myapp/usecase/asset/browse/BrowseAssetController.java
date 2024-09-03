@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myapp.usecase.AssetRepository;
 import com.myapp.usecase.AssetResponse;
 import com.myapp.usecase.AssetResponse.AssetResponseBuilder;
 import com.myapp.usecase.asset.Asset;
@@ -25,13 +26,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 class BrowseAssetController {
 
-  private final BrowseAssetRepository browseAssetRepository;
+  private final AssetRepository repository;
   private final ModelMapper modelMapper;
 
   @GetMapping("/assets")
   @ResponseStatus(OK)
   List<AssetResponse> findAll() {
-    final var assets = browseAssetRepository.findAll();
+    final var assets = repository.findAll();
 
     return assets.stream()
         .map(this::toResponse)
@@ -41,7 +42,7 @@ class BrowseAssetController {
   @GetMapping("/assets/{assetId}")
   @ResponseStatus(OK)
   AssetResponse find(@PathVariable Long assetId) {
-    final var asset = browseAssetRepository.find(assetId)
+    final var asset = repository.find(assetId)
         .orElseThrow(AssetExceptions::assetNotFound);
 
     return toResponse(asset);

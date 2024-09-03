@@ -5,11 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.myapp.usecase.asset.AssetExceptions;
 import com.myapp.usecase.asset.AssetType;
 
-import lombok.Builder;
 import lombok.Value;
 
 @Value
-@Builder
 class NewAsset {
 
   String name;

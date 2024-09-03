@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myapp.usecase.AssetResponse;
+import com.myapp.usecase.AssetResponse.AssetResponseBuilder;
 
 import lombok.AllArgsConstructor;
 
@@ -21,15 +22,19 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 class CreateAssetController {
 
-  private final CreateAssetRepository createAssetRepository;
+  private final CreateAssetRepository repository;
   private final ModelMapper mapper;
 
   @PostMapping("/assets")
   @ResponseStatus(CREATED)
   AssetResponse createAsset(@RequestBody @Valid CreateAssetRequest request) {
-    final var newAsset = mapper.map(request, NewAsset.NewAssetBuilder.class).build();
-    final var createdAsset = createAssetRepository.create(newAsset);
+    final var newAsset = repository.create(new NewAsset(
+        request.getName(),
+        request.getDescription(),
+        request.getType()
+    ));
 
-    return mapper.map(createdAsset, AssetResponse.AssetResponseBuilder.class).build();
+    return mapper.map(newAsset, AssetResponseBuilder.class)
+        .build();
   }
 }
