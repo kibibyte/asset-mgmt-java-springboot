@@ -21,6 +21,7 @@ class BrowseGroupAssetRepositoryImpl implements BrowseGroupAssetRepository {
 
   @Override
   public List<Asset> findAll(Long groupId) {
+    //TODO: handle not found entity
     return entityManager.find(GroupEntity.class, groupId)
         .getAssets()
         .stream()

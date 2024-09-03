@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myapp.usecase.GroupRepository;
 import com.myapp.usecase.group.browse.GroupResponse.GroupResponseBuilder;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 class BrowseGroupController {
 
-  private final BrowseGroupRepository repository;
+  private final GroupRepository repository;
   private final ModelMapper modelMapper;
 
   @GetMapping("/groups")
