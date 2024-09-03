@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation 'org.codehaus.groovy:groovy'
+    implementation 'org.apache.commons:commons-lang3'
     testImplementation('org.spockframework:spock-core')
 }
 

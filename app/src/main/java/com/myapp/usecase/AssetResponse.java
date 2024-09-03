@@ -9,6 +9,7 @@ import lombok.Value;
 @Builder
 public class AssetResponse {
 
+  Long id;
   String name;
   String description;
   AssetType type;

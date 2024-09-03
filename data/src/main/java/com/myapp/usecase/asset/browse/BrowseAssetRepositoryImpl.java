@@ -38,6 +38,7 @@ class BrowseAssetRepositoryImpl implements BrowseAssetRepository {
 
   private Asset toAsset(AssetEntity assetEntity) {
     return new Asset(
+        assetEntity.getId(),
         assetEntity.getName(),
         assetEntity.getType(),
         assetEntity.getDescription()

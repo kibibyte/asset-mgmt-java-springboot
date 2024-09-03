@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.myapp.exceptions.DomainException;
 import com.myapp.exceptions.EntityNotFoundException;
+import com.myapp.exceptions.InvalidArgumentException;
 
 @ControllerAdvice
 public class AppExceptionHandler extends ResponseEntityExceptionHandler {
@@ -22,4 +24,14 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     return handleExceptionInternal(ex, response, new HttpHeaders(), HttpStatus.NOT_FOUND, req);
   }
+
+  @ExceptionHandler({InvalidArgumentException.class})
+  @ResponseBody
+  public ResponseEntity<Object> handleInvalidArgumentOrState(WebRequest req, DomainException ex) {
+    logger.warn(ex.getMessage(), ex);
+    var response = ErrorResponse.of(ex);
+
+    return handleExceptionInternal(ex, response, new HttpHeaders(), HttpStatus.BAD_REQUEST, req);
+  }
+
 }

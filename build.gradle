@@ -22,6 +22,7 @@ subprojects {
             dependency 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
             dependency 'org.modelmapper:modelmapper:3.2.0'
             dependency 'org.postgresql:postgresql:42.7.4'
+            dependency 'org.apache.commons:commons-lang3:3.17.0'
         }
     }
 }
