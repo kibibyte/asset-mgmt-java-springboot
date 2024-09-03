@@ -1,4 +1,4 @@
-package com.hotel;
+package com.myapp;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonCreator.Mode.PROPERTIES;
