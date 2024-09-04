@@ -21,6 +21,7 @@ $ ./gradlew test
 ## Running locally
 
 ```shell script
+$ ./gradlew bootJar
 $ docker compose up
 ```
 
