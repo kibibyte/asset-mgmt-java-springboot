@@ -5,8 +5,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.myapp.usecase.Asset;
 import com.myapp.usecase.AssetEntity;
-import com.myapp.usecase.asset.Asset;
+import com.myapp.usecase.AssetMapper;
 
 import lombok.AllArgsConstructor;
 
@@ -25,11 +26,6 @@ class CreateAssetRepositoryImpl implements CreateAssetRepository {
 
     entityManager.persist(assetEntity);
 
-    return new Asset(
-        assetEntity.getId(),
-        assetEntity.getName(),
-        assetEntity.getType(),
-        assetEntity.getDescription()
-    );
+    return AssetMapper.map(assetEntity);
   }
 }

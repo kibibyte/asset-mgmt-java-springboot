@@ -1,9 +1,9 @@
 package com.myapp.usecase.asset.browse
 
+import com.myapp.usecase.Asset
 import com.myapp.usecase.AssetRepository
 import com.myapp.usecase.AssetResponse
 import com.myapp.usecase.MockMvcTest
-import com.myapp.usecase.asset.Asset
 import org.springframework.boot.test.json.JacksonTester
 import org.springframework.http.HttpStatus
 
@@ -11,19 +11,19 @@ import static com.myapp.usecase.asset.AssetType.IMAGE
 
 class BrowseAssetControllerTest extends MockMvcTest {
 
-    private AssetRepository assetRepository = Mock()
+    private AssetRepository repository = Mock()
     private JacksonTester<AssetResponse> assetResponseMapper
     private JacksonTester<List<AssetResponse>> assetsResponseMapper
 
     def setup() {
-        def controller = new BrowseAssetController(assetRepository, modelMapper)
+        def controller = new BrowseAssetController(repository, modelMapper)
         setupMvc(controller)
     }
 
     def "should find asset"() {
         given:
         def expectedAsset = createAsset()
-        assetRepository.find(expectedAsset.id) >> Optional.of(expectedAsset)
+        repository.find(expectedAsset.id) >> Optional.of(expectedAsset)
 
         when:
         def response = get("/assets/" + expectedAsset.id)
@@ -37,7 +37,7 @@ class BrowseAssetControllerTest extends MockMvcTest {
     def "should find all assets"() {
         given:
         def expectedAsset = createAsset()
-        assetRepository.findAll() >> List.of(expectedAsset)
+        repository.findAll() >> List.of(expectedAsset)
 
         when:
         def response = get("/assets")
@@ -58,11 +58,11 @@ class BrowseAssetControllerTest extends MockMvcTest {
     }
 
     private static Asset createAsset() {
-        return new Asset(
-                1L,
-                "Asset name",
-                IMAGE,
-                "Asset description"
-        )
+        return Asset.builder()
+                .id(1L)
+                .name("Asset name")
+                .description("Asset description")
+                .type(IMAGE)
+                .build();
     }
 }

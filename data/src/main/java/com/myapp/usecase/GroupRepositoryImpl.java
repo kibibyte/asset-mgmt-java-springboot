@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 import com.myapp.usecase.group.Group;
+import com.myapp.usecase.group.GroupRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -24,7 +25,7 @@ class GroupRepositoryImpl implements GroupRepository {
   @Override
   public Optional<Group> find(Long groupId) {
     return ofNullable(entityManager.find(GroupEntity.class, groupId))
-        .map(this::toGroup);
+        .map(GroupMapper::map);
   }
 
   public List<Group> findAll() {
@@ -32,16 +33,8 @@ class GroupRepositoryImpl implements GroupRepository {
         .getResultList();
 
     return groups.stream()
-        .map(this::toGroup)
+        .map(GroupMapper::map)
         .collect(toList());
-  }
-
-  private Group toGroup(GroupEntity groupEntity) {
-    return new Group(
-        groupEntity.getId(),
-        groupEntity.getName(),
-        groupEntity.getDescription()
-    );
   }
 }
 

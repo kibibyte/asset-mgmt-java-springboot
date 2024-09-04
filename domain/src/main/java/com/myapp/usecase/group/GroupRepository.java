@@ -1,9 +1,7 @@
-package com.myapp.usecase;
+package com.myapp.usecase.group;
 
 import java.util.List;
 import java.util.Optional;
-
-import com.myapp.usecase.group.Group;
 
 public interface GroupRepository {
 

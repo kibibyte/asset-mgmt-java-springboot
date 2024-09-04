@@ -2,7 +2,7 @@ package com.myapp.usecase.group.asset.browse;
 
 import java.util.List;
 
-import com.myapp.usecase.asset.Asset;
+import com.myapp.usecase.Asset;
 
 interface BrowseGroupAssetRepository {
 

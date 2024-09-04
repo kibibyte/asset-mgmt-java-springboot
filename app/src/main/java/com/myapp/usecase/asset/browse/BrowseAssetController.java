@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myapp.usecase.Asset;
 import com.myapp.usecase.AssetRepository;
 import com.myapp.usecase.AssetResponse;
 import com.myapp.usecase.AssetResponse.AssetResponseBuilder;
-import com.myapp.usecase.asset.Asset;
 import com.myapp.usecase.asset.AssetExceptions;
 
 import lombok.AllArgsConstructor;

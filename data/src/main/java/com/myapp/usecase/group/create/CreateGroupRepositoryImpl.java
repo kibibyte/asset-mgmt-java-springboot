@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.myapp.usecase.GroupEntity;
+import com.myapp.usecase.GroupMapper;
 import com.myapp.usecase.group.Group;
 
 import lombok.AllArgsConstructor;
@@ -24,10 +25,6 @@ class CreateGroupRepositoryImpl implements CreateGroupRepository {
 
     entityManager.persist(newGroupEntity);
 
-    return new Group(
-        newGroupEntity.getId(),
-        newGroupEntity.getName(),
-        newGroupEntity.getDescription()
-    );
+    return GroupMapper.map(newGroupEntity);
   }
 }
