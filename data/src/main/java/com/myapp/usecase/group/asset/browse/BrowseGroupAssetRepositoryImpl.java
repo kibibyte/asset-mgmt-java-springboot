@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 import com.myapp.usecase.Asset;
+import com.myapp.usecase.AssetMapper;
 import com.myapp.usecase.GroupEntity;
 
 import lombok.AllArgsConstructor;
@@ -25,14 +26,7 @@ class BrowseGroupAssetRepositoryImpl implements BrowseGroupAssetRepository {
     return entityManager.find(GroupEntity.class, groupId)
         .getAssets()
         .stream()
-        .map(assetEntity -> {
-              return Asset.builder()
-                  .id(assetEntity.getId())
-                  .name(assetEntity.getName())
-                  .description(assetEntity.getDescription())
-                  .type(assetEntity.getType())
-                  .build();
-            }
-        ).collect(toList());
+        .map(AssetMapper::map)
+        .collect(toList());
   }
 }

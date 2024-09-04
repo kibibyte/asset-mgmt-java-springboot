@@ -23,13 +23,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 class BrowseGroupAssetController {
 
-  private final BrowseGroupAssetRepository repository;
+  private final BrowseGroupAssetService service;
   private final ModelMapper modelMapper;
 
   @GetMapping("/groups/{groupId}/assets")
   @ResponseStatus(OK)
   List<AssetResponse> findAll(@PathVariable Long groupId) {
-    final var assets = repository.findAll(groupId);
+    final var assets = service.findAll(groupId);
 
     return assets.stream()
         .map(asset -> modelMapper.map(asset, AssetResponseBuilder.class).build())
