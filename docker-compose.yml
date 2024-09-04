@@ -1,0 +1,22 @@
+version : "3.8"
+services :
+  postgres_assets_mgmt :
+    image : postgres:15-alpine3.17
+    restart : always
+    environment :
+      POSTGRES_USER : assets
+      POSTGRES_PASSWORD : assets
+      POSTGRES_DB : assets
+    volumes :
+      - assets_mgmt:/var/lib/postgres
+  assets_mgmt_app :
+    build :
+      context : .
+      dockerfile : Dockerfile
+    ports :
+      - "8080:8080"
+    depends_on :
+      - postgres_assets_mgmt
+
+volumes :
+  assets_mgmt :
