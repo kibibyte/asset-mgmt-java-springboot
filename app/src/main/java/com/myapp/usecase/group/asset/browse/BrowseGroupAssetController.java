@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myapp.usecase.AssetResponse;
+import com.myapp.usecase.AssetResponse.AssetResponseBuilder;
 
 import lombok.AllArgsConstructor;
 
@@ -31,7 +32,7 @@ class BrowseGroupAssetController {
     final var assets = repository.findAll(groupId);
 
     return assets.stream()
-        .map(asset -> modelMapper.map(asset, AssetResponse.AssetResponseBuilder.class).build())
+        .map(asset -> modelMapper.map(asset, AssetResponseBuilder.class).build())
         .collect(toList());
   }
 }

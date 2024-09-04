@@ -4,5 +4,5 @@ import com.myapp.usecase.Asset;
 
 interface CreateAssetRepository {
 
-  Asset create(NewAsset createAsset);
+  Asset create(NewAsset newAsset);
 }
