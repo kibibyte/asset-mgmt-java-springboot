@@ -1,5 +1,7 @@
 package com.myapp.usecase.asset.update;
 
+import static java.util.Optional.ofNullable;
+
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -19,12 +21,16 @@ class UpdateAssetRepositoryImpl implements UpdateAssetRepository {
 
   @Transactional
   public void update(Long assetId, UpdatedAsset updatedAsset) {
-    Optional.ofNullable(entityManager.find(AssetEntity.class, assetId))
-        .ifPresent(assetEntity -> {
-          assetEntity.setName(updatedAsset.getName());
-          updatedAsset.getDescription()
-              .ifPresent(assetEntity::setDescription);
-          entityManager.merge(assetEntity);
-        });
+    findAsset(assetId).ifPresent(assetEntity -> {
+      assetEntity.setName(updatedAsset.getName());
+      updatedAsset.getDescription()
+          .ifPresent(assetEntity::setDescription);
+      
+      entityManager.merge(assetEntity);
+    });
+  }
+
+  private Optional<AssetEntity> findAsset(Long assetId) {
+    return ofNullable(entityManager.find(AssetEntity.class, assetId));
   }
 }

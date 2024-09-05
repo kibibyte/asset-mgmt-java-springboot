@@ -1,8 +1,11 @@
 package com.myapp.usecase.group.asset.browse;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.Collections.emptyList;
+import static java.util.Optional.ofNullable;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 
@@ -22,11 +25,14 @@ class BrowseGroupAssetRepositoryImpl implements BrowseGroupAssetRepository {
 
   @Override
   public List<Asset> findAll(Long groupId) {
-    //TODO: handle not found entity
-    return entityManager.find(GroupEntity.class, groupId)
-        .getAssets()
-        .stream()
-        .map(AssetMapper::map)
-        .collect(toList());
+    return findGroup(groupId)
+        .map(GroupEntity::getAssets)
+        .map(assets -> assets.stream().map(AssetMapper::map))
+        .map(Stream::toList)
+        .orElse(emptyList());
+  }
+
+  private Optional<GroupEntity> findGroup(Long groupId) {
+    return ofNullable(entityManager.find(GroupEntity.class, groupId));
   }
 }
