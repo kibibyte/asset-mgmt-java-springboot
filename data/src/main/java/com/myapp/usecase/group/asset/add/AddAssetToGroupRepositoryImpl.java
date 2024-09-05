@@ -1,5 +1,9 @@
 package com.myapp.usecase.group.asset.add;
 
+import static java.util.Optional.ofNullable;
+
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
@@ -19,12 +23,19 @@ class AddAssetToGroupRepositoryImpl implements AddAssetToGroupRepository {
   @Override
   @Transactional
   public void add(Long groupId, Long assetId) {
-    //TODO: handle not found asset/group entities
-    final var groupEntity = entityManager.find(GroupEntity.class, groupId);
-    final var assetEntity = entityManager.find(AssetEntity.class, assetId);
+    findGroup(groupId).ifPresent(groupEntity -> {
+      findAsset(assetId).ifPresent(assetEntity -> {
+            groupEntity.getAssets().add(assetEntity);
+          }
+      );
+    });
+  }
 
-    groupEntity
-        .getAssets()
-        .add(assetEntity);
+  public Optional<GroupEntity> findGroup(Long groupId) {
+    return ofNullable(entityManager.find(GroupEntity.class, groupId));
+  }
+
+  public Optional<AssetEntity> findAsset(Long assetId) {
+    return ofNullable(entityManager.find(AssetEntity.class, assetId));
   }
 }
