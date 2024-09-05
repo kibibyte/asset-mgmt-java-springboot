@@ -14,7 +14,7 @@ public class DeleteAssetFromGroupService {
 
   private final AssetRepository assetRepository;
   private final GroupRepository groupRepository;
-  private final DeleteAssetFromGroupRepository repository;
+  private final DeleteAssetFromGroupRepository deleteAssetFromGroupRepository;
 
   void delete(Long groupId, Long assetId) {
     groupRepository.find(groupId)
@@ -23,6 +23,6 @@ public class DeleteAssetFromGroupService {
     assetRepository.find(assetId)
         .orElseThrow(AssetExceptions::assetNotFound);
 
-    repository.delete(groupId, assetId);
+    deleteAssetFromGroupRepository.delete(groupId, assetId);
   }
 }

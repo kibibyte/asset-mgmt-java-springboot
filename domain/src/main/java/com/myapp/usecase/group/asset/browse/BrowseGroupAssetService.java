@@ -14,12 +14,12 @@ import lombok.AllArgsConstructor;
 public class BrowseGroupAssetService {
 
   private final GroupRepository groupRepository;
-  private final BrowseGroupAssetRepository repository;
+  private final BrowseGroupAssetRepository browseGroupAssetRepository;
 
   List<Asset> findAll(Long groupId) {
     groupRepository.find(groupId)
         .orElseThrow(GroupExceptions::groupNotFound);
 
-    return repository.findAll(groupId);
+    return browseGroupAssetRepository.findAll(groupId);
   }
 }

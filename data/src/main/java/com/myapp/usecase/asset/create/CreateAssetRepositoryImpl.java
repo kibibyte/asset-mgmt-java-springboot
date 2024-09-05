@@ -21,7 +21,7 @@ class CreateAssetRepositoryImpl implements CreateAssetRepository {
   public Asset create(NewAsset newAsset) {
     final var assetEntity = new AssetEntity();
     assetEntity.setName(newAsset.getName());
-    assetEntity.setDescription(newAsset.getDescription());
+    assetEntity.setDescription(newAsset.getDescription().orElse(null));
     assetEntity.setType(newAsset.getType());
 
     entityManager.persist(assetEntity);

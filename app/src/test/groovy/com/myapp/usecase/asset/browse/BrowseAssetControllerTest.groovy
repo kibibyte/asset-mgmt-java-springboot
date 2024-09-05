@@ -53,7 +53,7 @@ class BrowseAssetControllerTest extends MockMvcTest {
     private static void assertAsset(AssetResponse actualAsset, Asset expectedAsset) {
         assert actualAsset.id == expectedAsset.id
         assert actualAsset.name == expectedAsset.name
-        assert actualAsset.description == expectedAsset.description
+        assert actualAsset.description == expectedAsset.description.get()
         assert actualAsset.type == expectedAsset.type
     }
 

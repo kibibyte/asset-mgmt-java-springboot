@@ -1,7 +1,10 @@
 package com.myapp.usecase.group.create;
 
 import static com.myapp.usecase.asset.AssetExceptions.invalidArgument;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+
+import java.util.Optional;
 
 import lombok.Value;
 
@@ -18,5 +21,9 @@ class NewGroup {
 
     this.name = name;
     this.description = description;
+  }
+
+  public Optional<String> getDescription() {
+    return ofNullable(description);
   }
 }

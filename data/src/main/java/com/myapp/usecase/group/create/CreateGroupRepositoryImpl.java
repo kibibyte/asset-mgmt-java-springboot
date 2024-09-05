@@ -21,7 +21,7 @@ class CreateGroupRepositoryImpl implements CreateGroupRepository {
   public Group create(NewGroup newGroup) {
     final var newGroupEntity = new GroupEntity();
     newGroupEntity.setName(newGroup.getName());
-    newGroupEntity.setDescription(newGroup.getDescription());
+    newGroupEntity.setDescription(newGroup.getDescription().orElse(null));
 
     entityManager.persist(newGroupEntity);
 
