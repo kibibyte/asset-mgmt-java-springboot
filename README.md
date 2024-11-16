@@ -1,4 +1,4 @@
-# Asset management application (java, spring boot)
+# Asset management application (Java, Spring Boot)
 
 ## Modules
 

@@ -1,2 +1,2 @@
-rootProject.name = 'myapp'
+rootProject.name = 'asset-mgmt-java-springboot'
 include('domain', 'data', 'app')
